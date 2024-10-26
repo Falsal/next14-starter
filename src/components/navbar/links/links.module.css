@@ -26,7 +26,7 @@
         right:0;
         width: 50%;
         height: calc(100vh - 100px);
-        background-color: blueviolet;
+        background-color: var(--bg);
         display: flex;
         flex-direction: column;
         align-items: center;

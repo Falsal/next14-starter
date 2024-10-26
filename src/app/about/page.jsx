@@ -7,7 +7,7 @@ const Aboutpage = () => {
       <div className={styles.textContainer}>
         <h2 className={styles.subtitle}>About Agency</h2>
         <h1 className={styles.title}>
-          We crerate digital ideas that are bigger, better , bigger, bolder and
+          We create digital ideas that are bigger, better, bolder and
           greater.
         </h1>
         <p className={styles.desc}>
