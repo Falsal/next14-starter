@@ -1,11 +1,16 @@
+"use client"
 import Image from "next/image";
 import styles from "./contact.module.css";
-import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const Contactpage = () => {
 
-  const HydrationestNoSSR = dynamic(()=> import("@/components/Hydrationest"),{ssr:false})
+  const[isClient, setIsClient] = useState(false);
+  let a = Math.random();
 
+  useEffect(
+    ()=>setIsClient(true)
+    ,[]);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -18,8 +23,7 @@ const Contactpage = () => {
           />
       </div>
       <div className={styles.formContainer} >
-      <HydrationestNoSSR/>
-
+      {isClient &&  a }
         <form action="" className={styles.form}>
           <input type="text" placeholder="Name and Surname"/>
           <input type="text" placeholder="Email Address"/>
@@ -32,7 +36,10 @@ const Contactpage = () => {
             placeholder="Message"
           />
 
-          <button>Send</button>
+          <button onClick={(event)=>{
+            event.preventDefault()
+            console.log("Send button clicked !")
+          }}>Send</button>
         </form>
       </div>
     </div>
