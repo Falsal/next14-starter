@@ -10,6 +10,7 @@ const Singlepost = () => {
           alt=""
           fill
           className={styles.img}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className={styles.textContainer}>
@@ -21,6 +22,7 @@ const Singlepost = () => {
             className={styles.avatar}
             width={50}
             height={50}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Author</span>

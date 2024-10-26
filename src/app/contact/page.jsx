@@ -2,10 +2,17 @@ import Image from "next/image";
 import styles from "./contact.module.css";
 
 const Contactpage = () => {
+  console.log("Works inside Contact page !")
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image src="/contact.png" alt="" fill className={styles.img} />
+        <Image 
+          src="/contact.png" 
+          alt="" 
+          fill 
+          className={styles.img} 
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
       </div>
       <div className={styles.formContainer} >
         <form action="" className={styles.form}>
