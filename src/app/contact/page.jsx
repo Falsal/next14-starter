@@ -1,16 +1,17 @@
 "use client"
 import Image from "next/image";
 import styles from "./contact.module.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 const Contactpage = () => {
 
-  const[isClient, setIsClient] = useState(false);
+  // const[isClient, setIsClient] = useState(false);
   let a = Math.random();
+  console.log("a is : ", a)
 
-  useEffect(
-    ()=>setIsClient(true)
-    ,[]);
+  // useEffect(
+  //   ()=>setIsClient(true)
+  //   ,[]);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -23,7 +24,9 @@ const Contactpage = () => {
           />
       </div>
       <div className={styles.formContainer} >
-      {isClient &&  a }
+        <div suppressHydrationWarning>
+          { a }
+        </div>
         <form action="" className={styles.form}>
           <input type="text" placeholder="Name and Surname"/>
           <input type="text" placeholder="Email Address"/>
