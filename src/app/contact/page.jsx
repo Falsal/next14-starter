@@ -1,8 +1,11 @@
 import Image from "next/image";
 import styles from "./contact.module.css";
+import dynamic from "next/dynamic";
 
 const Contactpage = () => {
-  console.log("Works inside Contact page !")
+
+  const HydrationestNoSSR = dynamic(()=> import("@/components/Hydrationest"),{ssr:false})
+
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -15,6 +18,8 @@ const Contactpage = () => {
           />
       </div>
       <div className={styles.formContainer} >
+      <HydrationestNoSSR/>
+
         <form action="" className={styles.form}>
           <input type="text" placeholder="Name and Surname"/>
           <input type="text" placeholder="Email Address"/>
