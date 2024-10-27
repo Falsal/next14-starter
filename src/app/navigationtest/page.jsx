@@ -8,7 +8,7 @@ const NavigationTestPage = () => {
 
     const handleClick= ()=>{
         console.log("clicked");
-        router.push("/")
+        router.replace("/")
     }
   return (
     <>
