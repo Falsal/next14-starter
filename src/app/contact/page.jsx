@@ -5,13 +5,6 @@ import styles from "./contact.module.css";
 
 const Contactpage = () => {
 
-  // const[isClient, setIsClient] = useState(false);
-  let a = Math.random();
-  console.log("a is : ", a)
-
-  // useEffect(
-  //   ()=>setIsClient(true)
-  //   ,[]);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -24,9 +17,6 @@ const Contactpage = () => {
           />
       </div>
       <div className={styles.formContainer} >
-        <div suppressHydrationWarning>
-          { a }
-        </div>
         <form action="" className={styles.form}>
           <input type="text" placeholder="Name and Surname"/>
           <input type="text" placeholder="Email Address"/>
