@@ -8,7 +8,9 @@ const NavigationTestPage = () => {
 
     const handleClick= ()=>{
         console.log("clicked");
-        router.replace("/")
+        router.forward(); // will redirect to previously called page in the forward direction
+        //router.back(); // will redirect to previously called page in the reverse direction
+        //router.refresh(); // will not redirect but will fetch any data from the server
     }
   return (
     <>
