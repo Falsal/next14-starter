@@ -15,13 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientSideProviderTest>
-          <div className='container'>
-            <Navbar/>
-            {children}
-            <Footer/>
-          </div>
-        </ClientSideProviderTest>
+        {/* <ClientSideProviderTest/> */}
+        <div className='container'>
+          <Navbar/>
+          {children}
+          <Footer/>
+        </div>
       </body>
     </html>
   )
