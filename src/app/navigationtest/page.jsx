@@ -1,14 +1,16 @@
 "use client"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 const NavigationTestPage = () => {
 
     const router = useRouter();
+    const pathname = usePathname();
+    console.log("pathname :", pathname)
 
     const handleClick= ()=>{
         console.log("clicked");
-        router.forward(); // will redirect to previously called page in the forward direction
+        //router.forward(); // will redirect to previously called page in the forward direction
         //router.back(); // will redirect to previously called page in the reverse direction
         //router.refresh(); // will not redirect but will fetch any data from the server
     }
