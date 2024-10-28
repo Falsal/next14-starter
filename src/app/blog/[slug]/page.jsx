@@ -1,8 +1,34 @@
 import Image from "next/image";
 import styles from "./singlePost.module.css";
 
-const Singlepost = ({params}) => {
-  console.log(params)
+const getData = async (slug)=> {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`); // re-fetching data after 2000 msec
+
+  if(!res.ok) throw new Error("Something went wrong");
+
+  return res.json()
+  
+}
+
+const getUser = async (id)=> {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`); // re-fetching data after 2000 msec
+
+  if(!res.ok) throw new Error("Something went wrong");
+
+  return res.json()
+  
+}
+
+const Singlepost = async ({params}) => {
+
+  const {slug} = params;
+  const post = await getData(slug);
+  const user = await getUser(post.userId)
+  console.log(slug)
+  console.log("=======")
+  console.log(user)
+
+  post && console.log(post)
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -15,7 +41,7 @@ const Singlepost = ({params}) => {
         />
       </div>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Title</h1>
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.detail}>
           <Image
             src="https://images.pexels.com/photos/27351134/pexels-photo-27351134/free-photo-of-a-boat-by-the-pier.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
@@ -27,7 +53,7 @@ const Singlepost = ({params}) => {
           />
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Author</span>
-            <span className={styles.detailValue}>Terry Jefferson</span>
+            <span className={styles.detailValue}>{user.name}</span>
           </div>
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
@@ -35,10 +61,7 @@ const Singlepost = ({params}) => {
           </div>
         </div>
         <div className={styles.content}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas esse
-          deleniti dolore excepturi vitae repellat harum consequatur id, beatae
-          nulla quis, et, reiciendis eveniet laudantium tempore dolores? Ut,
-          minus porro.
+          {post.body}
         </div>
       </div>
     </div>
