@@ -4,11 +4,12 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 const NavigationTestPage = () => {
 
+    // CLIENT SIDE NAVIGATION
     // const router = useRouter();
     // const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const q = searchParams.get("q")
-    console.log(`searchParams.get("q") :`, q)
+    // const searchParams = useSearchParams();
+    // const q = searchParams.get("q")
+    // console.log(`searchParams.get("q") :`, q)
 
     const handleClick= ()=>{
         console.log("clicked");
