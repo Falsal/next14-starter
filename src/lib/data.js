@@ -27,31 +27,6 @@ export const getPost = async (slug)=>{
       throw new Error(`Post not found with slug: ${slug}`);
     }
 
-    // // Log the entire post object
-    // console.log("Fetched post object:", post);
-
-    // // Directly log createdAt to check access
-    // console.log("Accessing createdAt directly:", post.createdAt);
-
-    // // Check if createdAt is defined
-    // if (post.createdAt === undefined) {
-    //   console.error("createdAt is undefined in the fetched post object.");
-    // } else {
-    //   console.log("Raw createdAt value:", post.createdAt);
-    //   console.log("Type of createdAt:", typeof post.createdAt); // Should be 'object'
-
-    //   // Check if createdAt is a Date instance
-    //   if (post.createdAt instanceof Date) {
-    //     // Now convert to locale date string
-    //     post.createdAt = post.createdAt.toLocaleDateString();
-    //   } else {
-    //     console.error("Invalid date format for createdAt:", post.createdAt);
-    //   }
-
-    //   console.log("Formatted post.createdAt:", post.createdAt); // Should show formatted date
-    // }
-
-
     return post;
 
   } catch (error) {

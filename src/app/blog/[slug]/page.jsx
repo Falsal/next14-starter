@@ -4,37 +4,19 @@ import PostUser from "@/components/postUser/postUser";
 import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
-//FETCH DATA WITH AN API
-// const getData = async (slug)=> {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`); // fetching single post from api
-
-//   if(!res.ok) throw new Error("Something went wrong");
-
-//   return res.json()
-//}
-
 
 const Singlepost = async ({params}) => {
   const {slug} = params;
-
-  //FETCH DATA WITH AN API
-  // const post = await getData(slug);
 
   //FETCH DATA WITHOUT AN API
   const post = await getPost(slug);
     // Format `createdAt` for display
     const formattedDate = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A";
 
-  // slug &&console.log("slug :", slug)
-  // console.log("post :")
-  // post && console.log(post)
-  // post && console.log("formattedDate : ",formattedDate)
-  // console.log("date now :", Date.now())
 
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        {/* {console.log("createdAt :", post.createdAt)} */}
         {post?.img && (
           <Image
             src={post.img}
