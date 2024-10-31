@@ -22,21 +22,28 @@ const Singlepost = async ({params}) => {
 
   //FETCH DATA WITHOUT AN API
   const post = await getPost(slug);
+    // Format `createdAt` for display
+    const formattedDate = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A";
 
-  console.log("slug :")
-  console.log("post :")
-  post && console.log(post)
+  // slug &&console.log("slug :", slug)
+  // console.log("post :")
+  // post && console.log(post)
+  // post && console.log("formattedDate : ",formattedDate)
+  // console.log("date now :", Date.now())
 
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image
-          src="https://images.pexels.com/photos/27351134/pexels-photo-27351134/free-photo-of-a-boat-by-the-pier.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
-          alt=""
-          fill
-          className={styles.img}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {/* {console.log("createdAt :", post.createdAt)} */}
+        {post?.img && (
+          <Image
+            src={post.img}
+            alt=""
+            fill
+            className={styles.img}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        )}
       </div>
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post?.title}</h1>
@@ -54,12 +61,10 @@ const Singlepost = async ({params}) => {
           </Suspense>}
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>01.01.2024</span>
+            <span className={styles.detailValue}>{formattedDate}</span>
           </div>
         </div>
-        <div className={styles.content}>
-          {post?.body}
-        </div>
+        <div className={styles.content}>{post?.desc}</div>
       </div>
     </div>
   );

@@ -1,18 +1,7 @@
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 
-// // TEMPORARY DATA
-// const users = [
-//   { id: 1, name: "John" },
-//   { id: 2, name: "Jane" },
-// ];
 
-// const posts = [
-//   { id: 1, title: "Post 1", body: "......", userId: 1 },
-//   { id: 2, title: "Post 2", body: "......", userId: 1 },
-//   { id: 3, title: "Post 3", body: "......", userId: 2 },
-//   { id: 4, title: "Post 4", body: "......", userId: 2 },
-// ];
 
 export const getPosts = async ()=>{
     try {
@@ -29,7 +18,40 @@ export const getPosts = async ()=>{
 export const getPost = async (slug)=>{
   try {
     connectToDb();
-    const post = await Post.find({slug});  // {slug} ? or slug ?
+    // Fetch the post using lean() to get a plain object
+    const post = await Post.findOne({slug}).lean();  // when using a simple "find" we get back an array
+
+    // Check if post was found
+    if (!post) {
+      console.error(`No post found with slug: ${slug}`);
+      throw new Error(`Post not found with slug: ${slug}`);
+    }
+
+    // // Log the entire post object
+    // console.log("Fetched post object:", post);
+
+    // // Directly log createdAt to check access
+    // console.log("Accessing createdAt directly:", post.createdAt);
+
+    // // Check if createdAt is defined
+    // if (post.createdAt === undefined) {
+    //   console.error("createdAt is undefined in the fetched post object.");
+    // } else {
+    //   console.log("Raw createdAt value:", post.createdAt);
+    //   console.log("Type of createdAt:", typeof post.createdAt); // Should be 'object'
+
+    //   // Check if createdAt is a Date instance
+    //   if (post.createdAt instanceof Date) {
+    //     // Now convert to locale date string
+    //     post.createdAt = post.createdAt.toLocaleDateString();
+    //   } else {
+    //     console.error("Invalid date format for createdAt:", post.createdAt);
+    //   }
+
+    //   console.log("Formatted post.createdAt:", post.createdAt); // Should show formatted date
+    // }
+
+
     return post;
 
   } catch (error) {

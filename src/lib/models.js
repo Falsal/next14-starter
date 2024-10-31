@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
         default: false,
     }
 }, 
-{timeStamps: true}
+{timestamps: { type: Date, default: Date.now }}
 )
 
 
@@ -54,7 +54,7 @@ const postSchema = mongoose.Schema({
         unique: true,
     }
 }, 
-{timeStamps: true}
+{timestamps: { type: Date, default: Date.now }}
 )
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
