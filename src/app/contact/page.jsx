@@ -1,8 +1,10 @@
-"use client"
 import Image from "next/image";
 import styles from "./contact.module.css";
-// import { useEffect, useState } from "react";
 
+export const metadata = {
+  title: 'Contact Page',
+  description: 'Contact Description',
+}
 const Contactpage = () => {
 
   return (
@@ -29,10 +31,7 @@ const Contactpage = () => {
             placeholder="Message"
           />
 
-          <button onClick={(event)=>{
-            event.preventDefault()
-            console.log("Send button clicked !")
-          }}>Send</button>
+          <button >Send</button>
         </form>
       </div>
     </div>
