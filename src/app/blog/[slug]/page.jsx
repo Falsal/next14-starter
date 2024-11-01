@@ -30,14 +30,6 @@ const Singlepost = async ({params}) => {
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post?.title}</h1>
         <div className={styles.detail}>
-          <Image
-            src="https://images.pexels.com/photos/27351134/pexels-photo-27351134/free-photo-of-a-boat-by-the-pier.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
-            alt=""
-            className={styles.avatar}
-            width={50}
-            height={50}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
           {post && <Suspense fallback={<div>Loading...</div>}>
             <PostUser userId={post.userId}/>
           </Suspense>}
