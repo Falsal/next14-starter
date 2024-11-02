@@ -27,7 +27,9 @@ const userSchema = mongoose.Schema({
         default: false,
     }
 }, 
-{timestamps: { type: Date, default: Date.now }}
+// {timestamps: { type: Date, default: Date.now }}
+{timestamps: true}
+// lastModified: new Timestamp(1, Math.floor(new Date().getTime() / 1000)) 
 )
 
 
@@ -54,7 +56,9 @@ const postSchema = mongoose.Schema({
         unique: true,
     }
 }, 
-{timestamps: { type: Date, default: Date.now }}
+// {timestamps: { type: Date, default: Date.now }}
+{timestamps: true}
+
 )
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);

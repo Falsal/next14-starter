@@ -1,3 +1,6 @@
+import { Post } from "./models";
+import { connectToDb } from "./utils";
+
 export const addPost = async (formData)=>{
     "use server"
 
@@ -10,7 +13,24 @@ export const addPost = async (formData)=>{
     // restructuring method
     const {title, desc, slug, userId} = Object.fromEntries(formData);
 
-    console.log(title, desc, slug, userId)
+    console.log("input values: ",title, desc, slug, userId)
+
+    try {
+        connectToDb();
+
+        const newPost = new Post({
+            title,
+            desc,
+            slug,
+            userId
+        });
+
+        await newPost.save();
+        console.log("saved to db")
+    } catch (error) {
+        throw new Error("Somthing went wrong !");
+        
+    }
 
 
     
