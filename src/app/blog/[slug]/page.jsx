@@ -5,23 +5,37 @@ import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
 export const generateMetadata = async ({params})=> {
-
   const {slug} = params;
-
   const post = await getPost(slug);
-
   return {
     title: post.title,
     description: post.desc
   }
 }
 
+// FETCH DATA WITH AN API
+const getData = async (slug) => {
+  console.log("slug ", slug)
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  return res.json();
+};
+
 const Singlepost = async ({params}) => {
   const {slug} = params;
 
+  // FETCH DATA WITH AN API
+  const post = await getData(slug);
+
+  console.log("post.userId now:", post.userId)
+  console.log("post now:", post)
+
   //FETCH DATA WITHOUT AN API
-  const post = await getPost(slug);
-    // Format `createdAt` for display
+  //const post = await getPost(slug);
+  
+  // Format `createdAt` for display
     const formattedDate = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A";
 
 
@@ -41,9 +55,12 @@ const Singlepost = async ({params}) => {
       <div className={styles.textContainer}>
         <h1 className={styles.title}>{post?.title}</h1>
         <div className={styles.detail}>
-          {post && <Suspense fallback={<div>Loading...</div>}>
+          {post && post.userId ? <Suspense fallback={<div>Loading...</div>}>
             <PostUser userId={post.userId}/>
-          </Suspense>}
+          </Suspense>
+          : 
+            <div>User information unavailable</div>
+        }
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
             <span className={styles.detailValue}>{formattedDate}</span>
