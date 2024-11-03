@@ -1,14 +1,9 @@
+import { revalidatePath } from "next/cache";
 import { Post } from "./models";
 import { connectToDb } from "./utils";
 
 export const addPost = async (formData)=>{
     "use server"
-
-    // basic method for extracting form input values
-    // const title = formData.get("title")
-    // const desc = formData.get("desc")
-    // const slug = formData.get("slug")
-    // const userId = formData.get("userId")
     
     // restructuring method
     const {title, desc, slug, userId} = Object.fromEntries(formData);
@@ -26,7 +21,8 @@ export const addPost = async (formData)=>{
         });
 
         await newPost.save();
-        console.log("saved to db")
+        console.log("saved to db");
+        revalidatePath("/blog");
     } catch (error) {
         throw new Error("Somthing went wrong !");
         
@@ -35,4 +31,21 @@ export const addPost = async (formData)=>{
 
     
     
+}
+
+export const deletePost = async (formData)=>{
+    "use server"
+    
+    const {id} = Object.fromEntries(formData);
+
+    try {
+        connectToDb();
+
+        await Post.findByIdAndDelete(id);
+        console.log("Removed from db");
+        revalidatePath("/blog");
+    } catch (error) {
+        throw new Error("Somthing went wrong !");
+        
+    }   
 }
