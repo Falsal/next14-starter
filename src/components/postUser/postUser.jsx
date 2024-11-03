@@ -14,8 +14,21 @@ const PostUser = async ({userId}) => {
   // const user = await getUser(userId);
 
   //FETCH DATA WITHOUT AN API
-  const user = await getUser(userId);
+  // const user = await getUser(userId);
 
+  let user = null;
+  try {
+    // Attempt to fetch the user data
+    user = await getUser(userId);
+    console.log("Fetched user:", user); // Debugging log
+  } catch (error) {
+    console.error(`Failed to fetch user with ID ${userId}:`, error);
+  }
+
+  // Display an error message if the user data is unavailable
+  if (!user) {
+    return <div className={styles.error}>Error loading user data.</div>;
+  }
   return (
     <div className={styles.container}>
       <Image
