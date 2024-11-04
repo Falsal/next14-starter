@@ -6,9 +6,9 @@ export const addPost = async (formData)=>{
     "use server"
     
     // restructuring method
-    const {title, desc, slug, userId} = Object.fromEntries(formData);
+    const {title, desc, slug, userId, img} = Object.fromEntries(formData);
 
-    console.log("input values: ",title, desc, slug, userId)
+    console.log("input values: ",title, desc, slug, userId, img)
 
     try {
         connectToDb();
@@ -17,7 +17,8 @@ export const addPost = async (formData)=>{
             title,
             desc,
             slug,
-            userId
+            userId,
+            img
         });
 
         await newPost.save();
