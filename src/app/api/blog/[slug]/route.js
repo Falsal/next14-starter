@@ -20,3 +20,21 @@ export const GET = async (request, {params})=>{
         
     }
 }
+
+export const DELETE = async (request, {params})=>{
+
+    const {slug} = params;
+    
+    try {
+        connectToDb();
+
+        await Post.deleteOne({slug});
+
+        return NextResponse.json("post deleted !");
+
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to delete post !");
+        
+    }
+}
