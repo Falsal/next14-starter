@@ -27,11 +27,7 @@ export const addPost = async (formData)=>{
     } catch (error) {
         throw new Error("Somthing went wrong !");
         
-    }
-
-
-    
-    
+    }    
 }
 
 export const deletePost = async (formData)=>{
