@@ -20,7 +20,7 @@ const PostUser = async ({userId}) => {
   try {
     // Attempt to fetch the user data
     user = await getUser(userId);
-    console.log("Fetched user:", user); // Debugging log
+    //console.log("Fetched user:", user); // Debugging log
   } catch (error) {
     console.error(`Failed to fetch user with ID ${userId}:`, error);
   }
