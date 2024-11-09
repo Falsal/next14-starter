@@ -1,6 +1,6 @@
 import styles from "./blog.module.css";
 import PostCard from "@/components/postCard/postCard";
-import { getPosts } from "@/lib/data";
+// import { getPosts } from "@/lib/data";
 
 //FETCH DATA WITH AN API
 const getData = async ()=> {
