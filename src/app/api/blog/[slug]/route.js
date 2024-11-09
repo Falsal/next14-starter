@@ -3,10 +3,11 @@ import { connectToDb } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 
-export const GET = async (request, {params})=>{
+export const GET = async (request, props) => {
+    const params = await props.params;
 
     const {slug} = params;
-    
+
     try {
         connectToDb();
 
@@ -21,10 +22,11 @@ export const GET = async (request, {params})=>{
     }
 }
 
-export const DELETE = async (request, {params})=>{
+export const DELETE = async (request, props) => {
+    const params = await props.params;
 
     const {slug} = params;
-    
+
     try {
         connectToDb();
 
