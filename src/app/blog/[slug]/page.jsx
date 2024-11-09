@@ -5,8 +5,9 @@ import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
 export const generateMetadata = async ({params})=> {
-  const {slug} = params;
+  const {slug} = await params;
   const post = await getPost(slug);
+
   return {
     title: post.title,
     description: post.desc
@@ -15,7 +16,7 @@ export const generateMetadata = async ({params})=> {
 
 // FETCH DATA WITH AN API
 const getData = async (slug) => {
-  console.log("slug ", slug)
+  // console.log("slug ", slug)
   const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
   if (!res.ok) {
     throw new Error("Something went wrong");
@@ -24,19 +25,20 @@ const getData = async (slug) => {
 };
 
 const Singlepost = async ({params}) => {
-  const {slug} = params;
+  const {slug} = await params;
+  console.log("slug in [slug]/page.jsx :", slug)
 
   // FETCH DATA WITH AN API
   const post = await getData(slug);
 
-  console.log("post.userId now:", post.userId)
-  console.log("post now:", post)
+  // console.log("post.userId now:", post.userId)
+  // console.log("post now:", post)
 
   //FETCH DATA WITHOUT AN API
   //const post = await getPost(slug);
   
   // Format `createdAt` for display
-    const formattedDate = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A";
+    // const formattedDate = post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "N/A";
 
 
   return (
@@ -63,7 +65,8 @@ const Singlepost = async ({params}) => {
         }
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>{formattedDate}</span>
+            <span className={styles.detailValue}>{post?.createdAt ? post.createdAt : "N/A" }</span>
+            {/* <span className={styles.detailValue}>{formattedDate}</span> */}
           </div>
         </div>
         <div className={styles.content}>{post?.desc}</div>
