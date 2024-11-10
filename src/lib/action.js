@@ -1,10 +1,12 @@
+"use server"
+
 import { revalidatePath } from "next/cache";
 import { Post } from "./models";
 import { connectToDb } from "./utils";
-import { signIn } from "./auth";
+import { signIn, signOut } from "./auth";
 
 export const addPost = async (formData)=>{
-    "use server"
+    
     
     // restructuring method
     const {title, desc, slug, userId, img} = Object.fromEntries(formData);
@@ -12,7 +14,7 @@ export const addPost = async (formData)=>{
     console.log("input values: ",title, desc, slug, userId, img)
 
     try {
-        connectToDb();
+        await connectToDb();
 
         const newPost = new Post({
             title,
@@ -32,12 +34,12 @@ export const addPost = async (formData)=>{
 }
 
 export const deletePost = async (formData)=>{
-    "use server"
+    
     
     const {id} = Object.fromEntries(formData);
 
     try {
-        connectToDb();
+        await connectToDb();
 
         await Post.findByIdAndDelete(id);
         console.log("Removed from db");
@@ -50,6 +52,12 @@ export const deletePost = async (formData)=>{
 
 
 export  const handleGithubLogin = async ()=>{
-    "use server"
+    
     await signIn("github");
-  }
+}
+
+
+export  const handleLogout = async ()=>{
+
+    await signOut();
+}
