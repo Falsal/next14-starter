@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
+import bcrypt from "bcrypt";
 
 export const addPost = async (formData)=>{
     
@@ -83,10 +84,13 @@ export const register = async (formData) => {
             return "Username already exist !"
         }
 
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt)
+
         const newUser = new User({
             username : username,
             email : email,
-            password : password,
+            password : hashedPassword,
             img: img
         });
 
@@ -97,6 +101,23 @@ export const register = async (formData) => {
         console.log(`saved ${username} to Dbase`);
         
     } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+export const login = async (formData) => {
+
+    const {username,password} = Object.fromEntries(formData);
+    console.log("action.js / login ")
+   
+    try {
+        
+        // await signIn("credentials",{username,password});
+        await signIn("credentials",{username,password, redirect: false}); // over-riding default nextAuth behavior to prevent the redirect error (note that no session set up at this point)
+        
+    } catch (error) {
+        console.log("signIn error, /***** THIS IS AN ERROR FROM LOGIN ****/ ")
         console.log(error);
         return false;
     }
