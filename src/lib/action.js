@@ -106,19 +106,27 @@ export const register = async (previousState, formData) => {
     }
 }
 
-export const login = async (formData) => {
+export const login = async (prevState, formData) => {
 
     const {username,password} = Object.fromEntries(formData);
     console.log("action.js / login ")
    
     try {
         
-        // await signIn("credentials",{username,password});
-        await signIn("credentials",{username,password, redirect: false}); // over-riding default nextAuth behavior to prevent the redirect error (note that no session set up at this point)
+        await signIn("credentials",{username,password, redirect: false}); 
+        // the "redirect: false" parameter prevents automatic redirection AND the NEXT_REDIRECT error 
         
     } catch (error) {
         console.log("signIn error, /***** THIS IS AN ERROR FROM LOGIN ****/ ")
         console.log(error);
-        return false;
+
+        if(error.type === "CredentialsSignin") {
+            return {error: "Invalid username or password"}
+        }
+   
+        return {error: "Something went wrong during login!"}; 
+
+        // throw error; // suggested as alternative to returning error above to avoid getting the NEXT_REDIRECT error, but this did not work in my version here , but removing the automatic redirect did work.
+        
     }
 }
