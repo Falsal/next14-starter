@@ -63,15 +63,15 @@ export  const handleLogout = async ()=>{
     await signOut();
 }
 
-export const register = async (formData) => {
+export const register = async (previousState, formData) => {
 
     const {username, email, img, password, passwordRepeat} = Object.fromEntries(formData);
-    console.log("password :", password)
-    console.log("passwordRepeat :", passwordRepeat)
+    // console.log("password :", password)
+    // console.log("passwordRepeat :", passwordRepeat)
     
     if(password !== passwordRepeat){
-        console.log("Passwords do not match")
-        return "Passwords do not match !"
+        console.log("action/register -->  Passwords do not match")
+        return {error: "Passwords do not match !"} ; // this type of error object will be assigned to the state in the registerForm component (value of state.error)        
     }
 
     try {
@@ -81,7 +81,7 @@ export const register = async (formData) => {
 
         if(user){
             console.log("Username already exist !")
-            return "Username already exist !"
+            return {error: "Username already exist !"} ; // this type of error object will be assigned to the state in the registerForm component (value of state.error)
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -94,15 +94,15 @@ export const register = async (formData) => {
             img: img
         });
 
-        console.log("newUser :", newUser)
-
         await newUser.save();
 
         console.log(`saved ${username} to Dbase`);
+
+        return { success : true } ; //this object will appear as the value of "state.success" in the registerForm component
         
     } catch (error) {
         console.log(error);
-        return false;
+        return {error: "Something went wrong!"};
     }
 }
 
