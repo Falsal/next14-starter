@@ -126,7 +126,7 @@ export const login = async (prevState, formData) => {
    
         return {error: "Something went wrong during login!"}; 
 
-        // throw error; // suggested as alternative to returning error above to avoid getting the NEXT_REDIRECT error, but this did not work in my version here , but removing the automatic redirect did work.
+        // throw error; // this line was suggested as alternative to returning error above to avoid getting the NEXT_REDIRECT error, but this did not work in my version here , only removing the automatic redirect did work.
         
     }
 }
