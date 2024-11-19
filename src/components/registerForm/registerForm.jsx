@@ -2,13 +2,13 @@
 
 import styles from "./registerForm.module.css";
 import { register } from "@/lib/action";
-import {useFormState} from "react-dom";
+import {useActionState} from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
 
 const RegisterForm = () => {
-  const [state, formAction] = useFormState(register, undefined);
+  const [state, formAction] = useActionState(register, undefined);
 
   const router = useRouter();
 
