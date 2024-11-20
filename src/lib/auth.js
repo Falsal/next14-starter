@@ -5,9 +5,10 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { User } from "./models";
 import { connectToDb } from "./utils";
 import bcrypt from "bcrypt"
+import { authConfig } from "./auth.config";
 
 const login = async (credentials) =>{
-  console.log("inside auth.js /login")
+  // console.log("inside auth.js /login")
   //received credentials:
   // {
   //   username: 'Vitorio',
@@ -37,7 +38,7 @@ const login = async (credentials) =>{
     }
     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password) ;
 
-    console.log("auth.js/login , isPasswordCorrect L20 :", isPasswordCorrect)
+    // console.log("auth.js/login , isPasswordCorrect L20 :", isPasswordCorrect)
 
     if(!isPasswordCorrect){
       throw new Error("Wrong credentials");
@@ -52,7 +53,8 @@ const login = async (credentials) =>{
   }
 }
 
-export const { handlers : {POST, GET}, auth, signIn, signOut } = NextAuth({
+export const { handlers : {GET,POST}, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     GitHub({
       clientId: process.env.GITHUB_ID,
@@ -60,12 +62,12 @@ export const { handlers : {POST, GET}, auth, signIn, signOut } = NextAuth({
     }),
     CredentialsProvider({
       async authorize(credentials){
-       console.log("authorize(credentials) L43/ credentials :")
-       console.log(credentials)
+      //  console.log("authorize(credentials) L43/ credentials :")
+      //  console.log(credentials)
         try {
           const user = await login(credentials)
 
-          console.log("auth.js/authorize user :", user)
+          // console.log("auth.js/authorize user :", user)
 
           // Return a minimal user object for NextAuth
         return user
@@ -79,15 +81,15 @@ export const { handlers : {POST, GET}, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn({user, account, profile}){
-      console.log("inside auth.js/ signIn/ callbacks ");
-      console.log("signIn callback account.provider:", account.provider);
+      // console.log("inside auth.js/ signIn/ callbacks ");
+      // console.log("signIn callback account.provider:", account.provider);
       console.log("signIn callback user:", user);
       console.log("signIn callback account:", account);
   
-      if (account.provider === "credentials" && !user) {
-        console.log("AccessDenied: No user returned by credentials provider");
-        return false; // Reject sign-in
-      }
+      // if (account.provider === "credentials" && !user) {
+      //   console.log("AccessDenied: No user returned by credentials provider");
+      //   return false; // Reject sign-in
+      // }
 
       if(account.provider === "github"){
         connectToDb();
@@ -109,7 +111,8 @@ export const { handlers : {POST, GET}, auth, signIn, signOut } = NextAuth({
         }
       }
 
-      return true; // debugged:  this line was moved outside the if statement
-    }
-  }
+      return true;
+    },
+    ...authConfig.callbacks, // must be included, otherwise will be overwritten
+  },
 });
