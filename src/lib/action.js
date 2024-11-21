@@ -6,7 +6,7 @@ import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcrypt";
 
-export const addPost = async (formData)=>{
+export const addPost = async (prevState, formData)=>{
     
     
     // restructuring method
@@ -28,6 +28,7 @@ export const addPost = async (formData)=>{
         await newPost.save();
         console.log("saved to db");
         revalidatePath("/blog");
+        revalidatePath("/admin");
     } catch (error) {
         throw new Error("Somthing went wrong !");
         
@@ -45,12 +46,55 @@ export const deletePost = async (formData)=>{
         await Post.findByIdAndDelete(id);
         console.log("Removed from db");
         revalidatePath("/blog");
+        revalidatePath("/admin");
+
     } catch (error) {
         throw new Error("Somthing went wrong !");
         
     }   
 }
 
+export const addUser = async (prevState,formData)=>{
+    
+    // restructuring method
+    const {username,email,password, img} = Object.fromEntries(formData);
+
+    console.log("input values: ",username, email, password, img)
+
+    try {
+        await connectToDb();
+
+        const newUser = new User({
+            username,
+            email,
+            password,
+            img
+        });
+
+        await newUser.save();
+        console.log("saved to db");
+        revalidatePath("/admin");
+    } catch (error) {
+        throw new Error("Somthing went wrong !");
+        
+    }    
+}
+
+export const deleteUser = async (formData)=>{
+    
+    const {id} = Object.fromEntries(formData);
+
+    try {
+        await connectToDb();
+        await Post.deleteMany({userId: id})
+        await User.findByIdAndDelete(id);
+        console.log("Removed user from db");
+        revalidatePath("/admin");
+    } catch (error) {
+        throw new Error("Somthing went wrong !");
+        
+    }   
+}
 
 export  const handleGithubLogin = async ()=>{
     
