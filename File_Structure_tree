@@ -1,0 +1,111 @@
+/Users/falsalih/Desktop/next14-starter/
+├─] .env (ignored)
+├── .eslintrc.json
+├── .gitignore
+├─] .next/ (ignored)
+├── README.md
+├── jsconfig.json
+├── next.config.js
+├─] node_modules/ (ignored)
+├── package-lock.json
+├── package.json
+├── public/
+│   ├── about.png
+│   ├── brands.png
+│   ├── contact.png
+│   ├── favicon.ico
+│   ├── hero.gif
+│   ├── menu.png
+│   └── noavatar.png
+└── src/
+    ├── app/
+    │   ├── (auth)/
+    │   │   ├── forgot-password/
+    │   │   │   └── page.jsx
+    │   │   ├── login/
+    │   │   │   ├── login.module.css
+    │   │   │   └── page.jsx
+    │   │   └── register/
+    │   │       ├── page.jsx
+    │   │       └── register.module.css
+    │   ├── about/
+    │   │   ├── about.module.css
+    │   │   └── page.jsx
+    │   ├── admin/
+    │   │   ├── adminPage.module.css
+    │   │   └── page.jsx
+    │   ├── api/
+    │   │   ├── auth/
+    │   │   │   └── [...nextauth]/
+    │   │   │       └── route.js
+    │   │   └── blog/
+    │   │       ├── [slug]/
+    │   │       │   └── route.js
+    │   │       └── route.js
+    │   ├── blog/
+    │   │   ├── [slug]/
+    │   │   │   ├── page.jsx
+    │   │   │   └── singlePost.module.css
+    │   │   ├── blog.module.css
+    │   │   └── page.jsx
+    │   ├── contact/
+    │   │   ├── contact.module.css
+    │   │   └── page.jsx
+    │   ├── error.jsx
+    │   ├── globals.css
+    │   ├── home.module.css
+    │   ├── layout.js
+    │   ├── loading.jsx
+    │   ├── navigationtest/
+    │   │   └── page.jsx
+    │   ├── not-found.jsx
+    │   ├── page.jsx
+    │   └── serveractiontest/
+    │       └── page.jsx
+    ├── components/
+    │   ├── ClientSideProviderTest.jsx
+    │   ├── Hydrationest.jsx
+    │   ├── adminPostForm/
+    │   │   ├── adminPostForm.jsx
+    │   │   └── adminPostForm.module.css
+    │   ├── adminPosts/
+    │   │   ├── adminPosts.jsx
+    │   │   └── adminPosts.module.css
+    │   ├── adminUserForm/
+    │   │   ├── adminUserForm.jsx
+    │   │   └── adminUserForm.module.css
+    │   ├── adminUsers/
+    │   │   ├── adminUsers.jsx
+    │   │   └── adminUsers.module.css
+    │   ├── footer/
+    │   │   ├── Footer.jsx
+    │   │   └── footer.module.css
+    │   ├── loginForm/
+    │   │   ├── loginForm.jsx
+    │   │   └── loginForm.module.css
+    │   ├── navbar/
+    │   │   ├── Navbar.jsx
+    │   │   ├── links/
+    │   │   │   ├── Links.jsx
+    │   │   │   └── links.module.css
+    │   │   ├── navLink/
+    │   │   │   ├── navLink.jsx
+    │   │   │   └── navLink.module.css
+    │   │   └── navbar.module.css
+    │   ├── postCard/
+    │   │   ├── postCard.jsx
+    │   │   └── postCard.module.css
+    │   ├── postUser/
+    │   │   ├── postUser.jsx
+    │   │   └── postUser.module.css
+    │   └── registerForm/
+    │       ├── registerForm.jsx
+    │       └── registerForm.module.css
+    ├── lib/
+    │   ├── action.js
+    │   ├── auth.config.js
+    │   ├── auth.js
+    │   ├── data.js
+    │   ├── models.js
+    │   └── utils.js
+    └── middleware.js
